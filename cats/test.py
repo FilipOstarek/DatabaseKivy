@@ -17,4 +17,3 @@ popis.vek = 5
 popis.vaha = 10
 popis.samotny_popis = 'Hele pořádně ani nvm co tohle je za kočku - poznámka veterinářky Adély Pavlincové'
 db.create_popis(popis)
-

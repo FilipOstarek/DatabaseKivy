@@ -19,8 +19,9 @@ class Popis(Base):
     vek = Column(Integer)
     vaha = Column(Integer) #kg
     samotny_popis = Column(Text)
-    fotka = relationship('Fotka', backref='popis')
+    #fotka = relationship('Fotka', backref='popis')
     fotka_id = Column(Integer, ForeignKey('fotka.id'))
+    druh_id = Column(Integer, ForeignKey('druh.id'))
 
 
 class Fotka(Base):
@@ -29,8 +30,8 @@ class Fotka(Base):
     id = Column(Integer, primary_key=True)
     url = Column(String(150), unique=True, nullable=False)
     nazev_fotky = Column(String(length=100))
-    druh = relationship('Druh', backref='fotka')
-    druh_id = Column(Integer, ForeignKey('druh.id'))
+    #druh = relationship('Druh', backref='popis')
+    popis = relationship('Popis', backref='popis')
 
 class Druh(Base):
     __tablename__ = 'druh'
@@ -38,15 +39,13 @@ class Druh(Base):
     id = Column(Integer, primary_key=True)
     jmeno_druhu = Column(String(60), unique=True, nullable=False)
 
-
-
 class Database:
     DB_ENGINE = {
         SQLITE: 'sqlite:///{DB}',
         MYSQL: 'mysql+mysqlconnector://{USERNAME}:{PASSWORD}@localhost/{DB}'
     }
 
-    def __init__(self, dbtype='sqlite', username='', password='', dbname='../koronavirus.db'):
+    def __init__(self, dbtype='sqlite', username='', password='', dbname='data.db'):
         dbtype = dbtype.lower()
 
         if dbtype in self.DB_ENGINE.keys():
