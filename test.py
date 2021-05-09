@@ -2,6 +2,8 @@ from cats.database import *
 
 db = Database(dbtype='sqlite', dbname='data.db')
 
+db.read_popisy()
+
 druh = Druh()
 druh.jmeno_druhu = 'NOVINKA - Britský netopýr s fešáckým knírem'
 db.create_druh(druh)
@@ -17,4 +19,5 @@ popis.vek = 5
 popis.vaha = 10
 popis.samotny_popis = 'Hele pořádně ani nvm co tohle je za kočku - poznámka veterinářky Adély Pavlincové'
 db.create_popis(popis)
+
 
