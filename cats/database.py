@@ -16,11 +16,12 @@ class Popis(Base):
 
     id = Column(Integer, primary_key=True)
     jmeno = Column(String(50), nullable=True)
-    vek = Column(Integer)
-    vaha = Column(Integer) #kg
+    vek = Column(String(50), nullable=True)
+    vaha = Column(String(50), nullable=True)
     samotny_popis = Column(Text)
-    fotka = relationship('Fotka', backref='popis')
+    #fotka = relationship('Fotka', backref='popis')
     fotka_id = Column(Integer, ForeignKey('fotka.id'))
+    druh = Column(String(60), ForeignKey('druh.jmeno_druhu'))
 
 
 class Fotka(Base):
@@ -29,8 +30,8 @@ class Fotka(Base):
     id = Column(Integer, primary_key=True)
     url = Column(String(150), unique=True, nullable=False)
     nazev_fotky = Column(String(length=100))
-    druh = relationship('Druh', backref='fotka')
-    druh_id = Column(Integer, ForeignKey('druh.id'))
+    #druh = relationship('Druh', backref='popis')
+    popis = relationship('Popis', backref='popis')
 
 class Druh(Base):
     __tablename__ = 'druh'
@@ -38,15 +39,13 @@ class Druh(Base):
     id = Column(Integer, primary_key=True)
     jmeno_druhu = Column(String(60), unique=True, nullable=False)
 
-
-
 class Database:
     DB_ENGINE = {
         SQLITE: 'sqlite:///{DB}',
         MYSQL: 'mysql+mysqlconnector://{USERNAME}:{PASSWORD}@localhost/{DB}'
     }
 
-    def __init__(self, dbtype='sqlite', username='', password='', dbname='../koronavirus.db'):
+    def __init__(self, dbtype='sqlite', username='', password='', dbname='data.db'):
         dbtype = dbtype.lower()
 
         if dbtype in self.DB_ENGINE.keys():
@@ -86,6 +85,7 @@ class Database:
     def read_popisy(self, order=Popis.jmeno):
         try:
             result = self.session.query(Popis).order_by(order).all()
+            print(result)
             return result
         except:
             return False
@@ -111,9 +111,11 @@ class Database:
         except:
             return False
 
-    def read_druhy(self, order=Druh.id):
+    #def read_druhy(self, order=Druh.id):
+    def read_druhy(self):
         try:
-            result = self.session.query(Druh).order_by(order).all()
+            #result = self.session.query(Druh).order_by(order).all()
+            result = self.session.query(Druh).all()
             return result
         except:
             return False

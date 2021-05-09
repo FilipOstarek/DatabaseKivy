@@ -1,0 +1,61 @@
+BoxLayout:
+    orientation:'vertical'
+
+    MDToolbar:
+        title: 'Celková databáze'
+        md_bg_color: 0.102, 0.773, 0.718, 1
+        specific_text_color: 1, 1, 1, 1
+
+    MDBottomNavigation:
+        id: navigation
+        panel_color: 0.745, 0, 0, 1
+
+        MDBottomNavigationItem:
+            name: 'screen 1'
+            text: 'Databáze koček'
+            icon: 'card-bulleted'
+            DatabaseScreen:
+
+<KockaContent>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: "250dp"
+
+    MDTextField:
+        id: jmeno_kocky
+        text: 'jmeno'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+    MDDropDownItem:
+        id: druh_kocky
+        pos_hint: {'center_x': .5, 'center_y': .7}
+        size_hint_x: 1
+        text: 'Druh'
+        on_release: self.parent.menu_states.open()
+
+    MDTextField:
+        id: vek_kocky
+        text: 'vek'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+    MDTextField:
+        id: vaha_kocky
+        text: 'vaha'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+    MDTextField:
+        id: popis_kocky
+        text: 'popis'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+
+<DruhContent>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: "50dp"
+
+    MDTextField:
+        id: druh_kocky
+        text: 'Nový Druh'
+        pos_hint: {'center_x': .5, 'center_y': .9}

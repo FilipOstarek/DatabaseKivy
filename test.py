@@ -14,10 +14,11 @@ foto.url = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.reddit.com%2Fr
 db.create_fotka(foto)
 
 popis = Popis()
-popis.jmeno = 'Uwu'
+popis.jmeno = 'OwO'
 popis.vek = 5
 popis.vaha = 10
 popis.samotny_popis = 'Hele pořádně ani nvm co tohle je za kočku - poznámka veterinářky Adély Pavlincové'
+popis.druh = druh.jmeno_druhu
 db.create_popis(popis)
 
-
+db.update()
